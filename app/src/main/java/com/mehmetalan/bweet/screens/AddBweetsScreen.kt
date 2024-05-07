@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -34,6 +35,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.outlined.AttachFile
+import androidx.compose.material.icons.outlined.Photo
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ElevatedButton
@@ -106,6 +108,14 @@ fun AddBweet(
         contract = ActivityResultContracts.GetContent()
     ) {uri: Uri? ->
         imageUri = uri
+    }
+
+    val galleryLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        if (uri != null) {
+            imageUri = uri
+        }
     }
 
     val permissionLauncher = rememberLauncherForActivityResult(
@@ -228,74 +238,100 @@ fun AddBweet(
                         Spacer(modifier = Modifier.weight(1f))
                     }
                     Column (
-                        verticalArrangement = Arrangement.spacedBy(10.dp),
+                        verticalArrangement = Arrangement.SpaceBetween,
                         modifier = Modifier
                             .fillMaxHeight()
                     ) {
-                        OutlinedTextField(
-                            value = postContent,
-                            onValueChange = { postContent = it },
-                            placeholder = {
-                                Text(
-                                    text = "Postunuzu Giriniz"
-                                )
-                            },
-                            colors = OutlinedTextFieldDefaults.colors(
-                                unfocusedBorderColor = Color.Transparent,
-                                focusedBorderColor = Color.Transparent
-                            ),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .focusRequester(focusRequester),
-                            keyboardOptions = KeyboardOptions.Default,
-                            keyboardActions = KeyboardActions.Default,
-                        )
-                        if (imageUri != null) {
-                            Box(
+                        Column{
+                            OutlinedTextField(
+                                value = postContent,
+                                onValueChange = { postContent = it },
+                                placeholder = {
+                                    Text(
+                                        text = "Postunuzu Giriniz"
+                                    )
+                                },
+                                colors = OutlinedTextFieldDefaults.colors(
+                                    unfocusedBorderColor = Color.Transparent,
+                                    focusedBorderColor = Color.Transparent
+                                ),
                                 modifier = Modifier
-                                    .background(color = Color.Transparent)
-                                    .padding(1.dp)
-                                    .height(250.dp)
                                     .fillMaxWidth()
-                            ) {
-                                Image(
-                                    painter = rememberAsyncImagePainter(model = imageUri),
-                                    contentDescription = "Post Picture",
+                                    .focusRequester(focusRequester),
+                                keyboardOptions = KeyboardOptions.Default,
+                                keyboardActions = KeyboardActions.Default,
+                            )
+                            if (imageUri != null) {
+                                Box(
                                     modifier = Modifier
+                                        .background(color = Color.Transparent)
+                                        .padding(1.dp)
+                                        .height(250.dp)
                                         .fillMaxWidth()
-                                        .fillMaxHeight(),
-                                    contentScale = ContentScale.Crop
-                                )
-                                Icon(
-                                    imageVector = Icons.Default.Close,
-                                    contentDescription = "Remove Image",
-                                    modifier = Modifier
-                                        .align(alignment = Alignment.TopEnd)
-                                        .clickable {
-                                            imageUri = null
-                                        }
-                                )
+                                ) {
+                                    Image(
+                                        painter = rememberAsyncImagePainter(model = imageUri),
+                                        contentDescription = "Post Picture",
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .fillMaxHeight(),
+                                        contentScale = ContentScale.Crop
+                                    )
+                                    Icon(
+                                        imageVector = Icons.Default.Close,
+                                        contentDescription = "Remove Image",
+                                        modifier = Modifier
+                                            .align(alignment = Alignment.TopEnd)
+                                            .clickable {
+                                                imageUri = null
+                                            }
+                                    )
+                                }
                             }
                         }
                         if (imageUris.isNotEmpty()) {
                             LazyRow(
-                                modifier = Modifier.padding(16.dp),
                                 horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                verticalAlignment = Alignment.Bottom
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .padding(top = 450.dp)
                             ) {
-                                items(imageUris.size) { index ->
+                                items(imageUris.take(20)) { uri ->
                                     Image(
-                                        painter = rememberAsyncImagePainter(model = imageUris[index]),
+                                        painter = rememberAsyncImagePainter(model = uri),
                                         contentDescription = "Gallery Image",
                                         modifier = Modifier
-                                            .size(64.dp)
-                                            .clip(RoundedCornerShape(8.dp)),
+                                            .size(72.dp)
+                                            .clip(RoundedCornerShape(8.dp))
+                                            .clickable {
+                                                imageUri = uri // Tıklanan resmi imageUri'ye atıyoruz
+                                            },
                                         contentScale = ContentScale.Crop
                                     )
                                 }
+
+                                item {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(64.dp)
+                                            .background(Color.Transparent)
+                                            .clip(RoundedCornerShape(8.dp))
+                                            .clickable {
+                                                galleryLauncher.launch(arrayOf("image/*"))
+                                            },
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Outlined.Photo,
+                                            contentDescription = "Gallery Button",
+                                            modifier = Modifier
+                                                .size(120.dp)
+                                        )
+                                    }
+                                }
                             }
                         } else {
-                            Text("Galeriye erişim için izin verilmedi veya galeri boş.")
+                            Text("Galeride resim yok veya erişim izni verilmedi.")
                         }
                     }
                 }
@@ -308,7 +344,6 @@ fun getGalleryImages(contentResolver: ContentResolver): List<Uri> {
     val uriList = mutableListOf<Uri>()
     val projection = arrayOf(MediaStore.Images.Media._ID)
 
-    // Query the external image storage
     val cursor = contentResolver.query(
         MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
         projection,
@@ -317,19 +352,18 @@ fun getGalleryImages(contentResolver: ContentResolver): List<Uri> {
         "${MediaStore.Images.Media.DATE_TAKEN} DESC"
     )
 
-    // Null kontrolü ekleniyor
-    if (cursor != null) {
-        val idIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID)
-        while (cursor.moveToNext()) {
-            val id = cursor.getLong(idIndex)
+    cursor?.use {
+        val idIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media._ID)
+        while (it.moveToNext()) {
+            val id = it.getLong(idIndex)
             val imageUri = Uri.withAppendedPath(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 id.toString()
             )
             uriList.add(imageUri)
         }
-        cursor.close() // Cursor'ı kapatmak gerekir
     }
 
-    return uriList
+    // İlk 20 öğeyi alıyoruz
+    return uriList.take(20)
 }
