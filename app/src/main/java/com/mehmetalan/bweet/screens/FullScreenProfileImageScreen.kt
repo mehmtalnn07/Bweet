@@ -33,13 +33,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
+import com.mehmetalan.bweet.R
 import com.mehmetalan.bweet.viewmodel.EditProfileViewModel
 import kotlinx.coroutines.delay
 
@@ -156,14 +156,14 @@ fun FullScreenProfileImage(
                     ) {
                         Column {
                             Text(
-                                text = "Fotoğraf Çek",
+                                text = stringResource(id = R.string.camera),
                                 modifier = Modifier
                                     .clickable { isDialogOpen = false }
                                     .padding(16.dp)
                             )
                             Divider()
                             Text(
-                                text = "Mevcut Fotoğraflardan Seç",
+                                text = stringResource(id = R.string.gallery),
                                 modifier = Modifier
                                     .clickable {
                                         galleryLauncher.launch("image/*")

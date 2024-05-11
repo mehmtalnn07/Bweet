@@ -4,26 +4,19 @@ import android.annotation.SuppressLint
 import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.More
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.outlined.Message
 import androidx.compose.material.icons.outlined.NotificationAdd
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -38,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -45,6 +39,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.google.firebase.auth.FirebaseAuth
+import com.mehmetalan.bweet.R
 import com.mehmetalan.bweet.item_view.BweetItem
 import com.mehmetalan.bweet.navigation.Routes
 import com.mehmetalan.bweet.utils.SharePreferences
@@ -178,9 +173,9 @@ fun OtherUser(
                         ) {
                             Text(
                                 text = if (followerList != null && followerList!!.contains(currentUserId)) {
-                                    "Takipten çıkar"
+                                    stringResource(id = R.string.unfollow)
                                 } else {
-                                    "Takip et"
+                                    stringResource(id = R.string.follow)
                                 }
                             )
                         }
@@ -247,7 +242,7 @@ fun OtherUser(
                             }
                     )
                     Text(
-                        text = "${followingList!!.size} Takip edilen",
+                        text = "${followingList!!.size}" + " " + stringResource(id = R.string.followed),
                         modifier = Modifier
                             .constrainAs(followingsNumber) {
                                 start.linkTo(userUserName.start)
@@ -258,7 +253,7 @@ fun OtherUser(
                             }
                     )
                     Text(
-                        text = "${followerList!!.size} Takipçi",
+                        text = "${followerList!!.size}" + " " + stringResource(id = R.string.follower),
                         modifier = Modifier
                             .constrainAs(followersNumber) {
                                 start.linkTo(followingsNumber.end, margin = 10.dp)

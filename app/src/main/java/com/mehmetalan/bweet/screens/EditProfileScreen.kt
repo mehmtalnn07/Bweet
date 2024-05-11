@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -37,6 +38,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.mehmetalan.bweet.R
 import com.mehmetalan.bweet.model.UserModel
 import com.mehmetalan.bweet.utils.SharePreferences
 import com.mehmetalan.bweet.viewmodel.AuthViewModel
@@ -60,7 +62,7 @@ fun EditScreen(
 
     if (userId == null) {
         Text(
-            text = "Kullanıcı Oturum Açmamış"
+            text = stringResource(id = R.string.null_user)
         )
         return
     }
@@ -104,7 +106,7 @@ fun EditScreen(
             onValueChange = { updateUserName = it },
             label = {
                 Text(
-                    text = "Name"
+                    text = stringResource(id = R.string.name)
                 )
             },
             shape = RoundedCornerShape(32.dp),
@@ -116,7 +118,7 @@ fun EditScreen(
             onValueChange = { updateUserBio = it },
             label = {
                 Text(
-                    text = "Bio"
+                    text = stringResource(id = R.string.bio)
                 )
             },
             shape = RoundedCornerShape(32.dp),
@@ -137,7 +139,7 @@ fun EditScreen(
                 .fillMaxWidth()
         ) {
             Text(
-                text = "Kaydet",
+                text = stringResource(id = R.string.save),
                 color = MaterialTheme.colorScheme.background
             )
         }

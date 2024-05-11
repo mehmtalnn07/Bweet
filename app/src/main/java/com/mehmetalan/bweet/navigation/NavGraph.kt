@@ -29,7 +29,6 @@ import androidx.navigation.navArgument
 import com.mehmetalan.bweet.model.BottomNavigationItem
 import com.mehmetalan.bweet.screens.AddBweet
 import com.mehmetalan.bweet.screens.BookmarkScreen
-import com.mehmetalan.bweet.screens.BottomNavigation
 import com.mehmetalan.bweet.screens.EditScreen
 import com.mehmetalan.bweet.screens.FollowersScreen
 import com.mehmetalan.bweet.screens.FollowingsScreen
@@ -44,7 +43,6 @@ import com.mehmetalan.bweet.screens.Profile
 import com.mehmetalan.bweet.screens.Register
 import com.mehmetalan.bweet.screens.Search
 import com.mehmetalan.bweet.screens.Splash
-import okhttp3.Route
 
 @Composable
 fun NavGraph(
@@ -151,11 +149,6 @@ fun NavGraph(
             }
             composable(route = "editScreen") {
                 EditScreen(
-                    navController = navController
-                )
-            }
-            composable(route = "bookmarkScreen"){
-                BookmarkScreen(
                     navController = navController
                 )
             }

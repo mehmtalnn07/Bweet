@@ -68,17 +68,6 @@ private fun UserCard(
     user: UserModel,
     navController: NavHostController
 ) {
-    val userViewModel: UserViewModel = viewModel()
-    val followerList by userViewModel.followerList.observeAsState(null)
-    val followingList by userViewModel.followingList.observeAsState(null)
-    var followerId: String? = null
-    for (followerUserId in followerList!!) {
-        followerId = followerUserId
-    }
-    var currentUserId = ""
-    if (FirebaseAuth.getInstance().currentUser != null) {
-        currentUserId = FirebaseAuth.getInstance().currentUser!!.uid
-    }
     Card(
         modifier = Modifier
             .fillMaxWidth()

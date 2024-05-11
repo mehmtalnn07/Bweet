@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">Bweet</string>
+    <string name="post">Gönderi</string>
+    <string name="post_place_holder">Neler oluyor?</string>
+    <string name="permission_denied_gallery">Galeride resim yok veya erişim izni verilmedi</string>
+    <string name="null_user">Kullanıcı oturum açmamış</string>
+    <string name="name">İsim</string>
+    <string name="bio">Hakkınızda</string>
+    <string name="save">Kaydet</string>
+    <string name="camera">Fotoğraf çek</string>
+    <string name="gallery">Mevcut fotoğraflardan seç</string>
+    <string name="profile">Profil</string>
+    <string name="bookmark">Yer işaretleri</string>
+    <string name="follower_request">Takipçi istekleri</string>
+    <string name="logout">Çıkış yap</string>
+    <string name="email">Email</string>
+    <string name="password">Parola</string>
+    <string name="login">Giriş yap</string>
+    <string name="new_user_info">Yeni kullanıcı mısın? Hesabını oluştur</string>
+    <string name="notification_screen">Bildirim ekranı</string>
+    <string name="unfollow">Takipten çıkar</string>
+    <string name="follow">Takip et</string>
+    <string name="followed">Takip edilen</string>
+    <string name="follower">Takipçi</string>
+    <string name="edit_profile">Profili düzenle</string>
+    <string name="create_account">Hesabını oluştur</string>
+    <string name="surname">Soy isim</string>
+    <string name="username">Kullanıcı adı</string>
+    <string name="phone_number">Telefon numarası</string>
+    <string name="signup">Hesabını oluştur</string>
+    <string name="search_at_bweet">"Bweet'te ara"</string>
 </resources>

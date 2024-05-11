@@ -49,7 +49,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -63,18 +62,17 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.wear.compose.material.MaterialTheme.colors
 import coil.compose.rememberAsyncImagePainter
 import com.google.firebase.auth.FirebaseAuth
+import com.mehmetalan.bweet.R
 import com.mehmetalan.bweet.navigation.Routes
 import com.mehmetalan.bweet.utils.SharePreferences
 import com.mehmetalan.bweet.viewmodel.AddBweetViewModel
-import com.mehmetalan.bweet.viewmodel.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -185,7 +183,7 @@ fun AddBweet(
                         enabled = if (postContent.isEmpty() && imageUri == null) {false} else {true}
                     ) {
                         Text(
-                            text = "Gönderi",
+                            text = stringResource(id = R.string.post),
                             color = MaterialTheme.colorScheme.background
                         )
                     }
@@ -248,7 +246,7 @@ fun AddBweet(
                                 onValueChange = { postContent = it },
                                 placeholder = {
                                     Text(
-                                        text = "Postunuzu Giriniz"
+                                        text = stringResource(id = R.string.post_place_holder)
                                     )
                                 },
                                 colors = OutlinedTextFieldDefaults.colors(
@@ -304,7 +302,8 @@ fun AddBweet(
                                             .size(72.dp)
                                             .clip(RoundedCornerShape(8.dp))
                                             .clickable {
-                                                imageUri = uri // Tıklanan resmi imageUri'ye atıyoruz
+                                                imageUri =
+                                                    uri // Tıklanan resmi imageUri'ye atıyoruz
                                             },
                                         contentScale = ContentScale.Crop
                                     )
@@ -331,7 +330,9 @@ fun AddBweet(
                                 }
                             }
                         } else {
-                            Text("Galeride resim yok veya erişim izni verilmedi.")
+                            Text(
+                                text = stringResource(id = R.string.permission_denied_gallery)
+                            )
                         }
                     }
                 }

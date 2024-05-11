@@ -44,7 +44,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -52,6 +51,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -62,14 +62,11 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import androidx.wear.compose.material.MaterialTheme.colors
 import coil.compose.rememberAsyncImagePainter
 import com.mehmetalan.bweet.R
-import com.mehmetalan.bweet.model.UserModel
 import com.mehmetalan.bweet.navigation.Routes
 import com.mehmetalan.bweet.viewmodel.AuthViewModel
 import com.mehmetalan.bweet.ui.theme.BweetTheme
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -135,7 +132,7 @@ fun Register(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = "Bweet",
+                        text = stringResource(id = R.string.app_name),
                         fontWeight = FontWeight.Bold
                     )
                 },
@@ -169,7 +166,7 @@ fun Register(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "Hesabını Oluştur",
+                        text = stringResource(id = R.string.create_account),
                         fontWeight = FontWeight.Bold,
                         style = MaterialTheme.typography.titleLarge
                     )
@@ -204,7 +201,7 @@ fun Register(
                         onValueChange = { name = it },
                         label = {
                             Text(
-                                text = "İsim",
+                                text = stringResource(id = R.string.name),
                             )
                         },
                         keyboardOptions = KeyboardOptions(
@@ -218,7 +215,7 @@ fun Register(
                         onValueChange = { surName = it },
                         label = {
                             Text(
-                                text = "Soy İsim",
+                                text = stringResource(id = R.string.surname),
                             )
                         },
                         keyboardOptions = KeyboardOptions(
@@ -231,7 +228,7 @@ fun Register(
                         onValueChange = { userName = it },
                         label = {
                             Text(
-                                text = "Kullanıcı Adı"
+                                text = stringResource(id = R.string.username)
                             )
                         },
                         keyboardOptions = KeyboardOptions(
@@ -244,7 +241,7 @@ fun Register(
                         onValueChange = { bio = it },
                         label = {
                             Text(
-                                text = "Bio"
+                                text = stringResource(id = R.string.bio)
                             )
                         },
                         keyboardOptions = KeyboardOptions(
@@ -258,7 +255,7 @@ fun Register(
                         onValueChange = { phoneNumber = it },
                         label = {
                             Text(
-                                text = "Telefon Numarası"
+                                text = stringResource(id = R.string.phone_number)
                             )
                         },
                         keyboardOptions = KeyboardOptions(
@@ -271,7 +268,7 @@ fun Register(
                         onValueChange = { email = it },
                         label = {
                             Text(
-                                text = "E-Posta"
+                                text = stringResource(id = R.string.email)
                             )
                         },
                         keyboardOptions = KeyboardOptions(
@@ -284,7 +281,7 @@ fun Register(
                         onValueChange = { password = it },
                         label = {
                             Text(
-                                text = "Parola"
+                                text = stringResource(id = R.string.password)
                             )
                         },
                         trailingIcon = {
@@ -337,7 +334,7 @@ fun Register(
                         ),
                     ) {
                         Text(
-                            text = "Sign Up",
+                            text = stringResource(id = R.string.signup),
                             color = MaterialTheme.colorScheme.background
                         )
                     }

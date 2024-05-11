@@ -34,13 +34,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
-import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
@@ -50,11 +47,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.google.firebase.auth.FirebaseAuth
@@ -171,7 +168,7 @@ fun Home(
                     NavigationDrawerItem(
                         label = {
                             Text(
-                                text = "Profil",
+                                text = stringResource(id = R.string.profile),
                                 fontWeight = FontWeight.ExtraBold,
                                 fontSize = 25.sp,
                                 color = MaterialTheme.colorScheme.onBackground
@@ -197,7 +194,7 @@ fun Home(
                     NavigationDrawerItem(
                         label = {
                             Text(
-                                text = "Yer işaretleri",
+                                text = stringResource(id = R.string.bookmark),
                                 fontWeight = FontWeight.ExtraBold,
                                 fontSize = 25.sp,
                                 color = MaterialTheme.colorScheme.onBackground
@@ -220,7 +217,7 @@ fun Home(
                     NavigationDrawerItem(
                         label = {
                             Text(
-                                text = "Takipçi İstekleri",
+                                text = stringResource(id = R.string.follower_request),
                                 fontWeight = FontWeight.ExtraBold,
                                 fontSize = 25.sp,
                                 color = MaterialTheme.colorScheme.onBackground
@@ -241,7 +238,7 @@ fun Home(
                     NavigationDrawerItem(
                         label = {
                             Text(
-                                text = "Çıkış Yap",
+                                text = stringResource(id = R.string.logout),
                                 fontWeight = FontWeight.ExtraBold,
                                 fontSize = 25.sp,
                                 color = Color.Red
