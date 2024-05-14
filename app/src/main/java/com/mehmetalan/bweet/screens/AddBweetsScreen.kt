@@ -216,24 +216,7 @@ fun AddBweet(
                                 .clip(shape = CircleShape),
                             contentScale = ContentScale.Crop
                         )
-                        IconButton(
-                            onClick = {
-                                val isGranted = ContextCompat.checkSelfPermission(
-                                    context, permissionToRequest
-                                ) == PackageManager.PERMISSION_GRANTED
-                                if (isGranted) {
-                                    launcher.launch("image/*")
-                                } else {
-                                    permissionLauncher.launch(permissionToRequest)
-                                }
-                            }
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.AttachFile,
-                                contentDescription = "Select Picture"
-                            )
-                        }
-                        Spacer(modifier = Modifier.weight(1f))
+                        //Spacer(modifier = Modifier.weight(1f))
                     }
                     Column (
                         verticalArrangement = Arrangement.SpaceBetween,

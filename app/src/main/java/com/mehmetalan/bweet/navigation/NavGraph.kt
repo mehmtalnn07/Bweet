@@ -28,7 +28,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.mehmetalan.bweet.model.BottomNavigationItem
 import com.mehmetalan.bweet.screens.AddBweet
-import com.mehmetalan.bweet.screens.BookmarkScreen
 import com.mehmetalan.bweet.screens.EditScreen
 import com.mehmetalan.bweet.screens.FollowersScreen
 import com.mehmetalan.bweet.screens.FollowingsScreen

@@ -159,7 +159,7 @@ fun BweetItem(
                     modifier = Modifier
                         .constrainAs(bweetImage){
                             top.linkTo(content.bottom, margin = 10.dp)
-                            start.linkTo(userName.end)
+                            start.linkTo(bweetImage.end)
                             end.linkTo(parent.end)
                         }
                 ) {

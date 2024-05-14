@@ -327,6 +327,7 @@ fun Register(
                                           context = context
                                       )
                                   }
+                            navController.navigate(route = Routes.Login.routes)
                         },
                         modifier = Modifier.fillMaxWidth(),
                         colors = ButtonDefaults.buttonColors(
